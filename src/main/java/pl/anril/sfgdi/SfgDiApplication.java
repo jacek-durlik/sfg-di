@@ -3,10 +3,7 @@ package pl.anril.sfgdi;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
-import pl.anril.sfgdi.controllers.ConstructorInjectedController;
-import pl.anril.sfgdi.controllers.MyController;
-import pl.anril.sfgdi.controllers.PropertyInjectedController;
-import pl.anril.sfgdi.controllers.SetterBasedController;
+import pl.anril.sfgdi.controllers.*;
 
 @SpringBootApplication
 public class SfgDiApplication {
@@ -16,9 +13,9 @@ public class SfgDiApplication {
         ApplicationContext ctxt = SpringApplication.run(SfgDiApplication.class, args);
         MyController controller = (MyController) ctxt.getBean("myController");
 
-        String greeting = controller.sayHello();
 
-        System.out.println(greeting);
+        System.out.println("----------- primary");
+        System.out.println(controller.sayHello());
         System.out.println("----------- property");
 
         PropertyInjectedController propertyInjectedController = (PropertyInjectedController) ctxt.getBean("propertyInjectedController");
@@ -30,6 +27,11 @@ public class SfgDiApplication {
         System.out.println("----------- constructor");
         ConstructorInjectedController constructorInjectedController = (ConstructorInjectedController) ctxt.getBean("constructorInjectedController");
         System.out.println(constructorInjectedController.sayGreeting());
+
+        System.out.println("----------- i18n");
+        I18nController i18nController = (I18nController) ctxt.getBean("i18nController");
+        System.out.println(i18nController.sayHello());
+
     }
 
 }
